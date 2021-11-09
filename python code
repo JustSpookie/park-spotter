@@ -1,0 +1,87 @@
+import pyautogui
+import time
+from PIL import Image
+
+imcontrole = 0
+plaatsen = [0,0,0,0,0,0,0,0]
+i = 0
+
+def plek():
+    x = 0
+    while x < 8:
+        if plaatsen[x] == 0:
+            print("Plek ", x + 1, " is leeg")
+        else:
+            print("Plek ", x + 1, " is vol")
+
+        x = x + 1
+
+def controle():
+    x = range(10)
+    gemiddelde_kleur_r = 0
+    gemiddelde_kleur_g = 0
+    gemiddelde_kleur_b = 0
+    for n in x:
+        for s in x:
+            colors_r, colors_g, colors_b = imcontrole.getpixel((n, s))
+            gemiddelde_kleur_r = gemiddelde_kleur_r + colors_r
+            gemiddelde_kleur_g = gemiddelde_kleur_g + colors_g
+            gemiddelde_kleur_b = gemiddelde_kleur_b + colors_b
+            #print(colors_r, " , ", colors_g, " , ", colors_b)
+    gemiddelde_kleur_r = gemiddelde_kleur_r / 100
+    gemiddelde_kleur_g = gemiddelde_kleur_g / 100
+    gemiddelde_kleur_b = gemiddelde_kleur_b / 100
+    #print("gemiddelde kleur: ", gemiddelde_kleur_r, " , ",gemiddelde_kleur_g, " , ", gemiddelde_kleur_b)
+    if (((gemiddelde_kleur_r >= 155) & (gemiddelde_kleur_r <= 185)) & ((gemiddelde_kleur_g >= 160) & (gemiddelde_kleur_g <= 190)) & ((gemiddelde_kleur_b >= 115) & (gemiddelde_kleur_b <= 145))):
+        #print("Er staat geen auto")
+        plaatsen[i] = 0
+    else:
+        #print("er staat een auto")
+        plaatsen[i] = 1
+
+
+im = Image.open(r'C:\Users\storm\OneDrive\Bureaublad\hoi.jpeg')
+im1 = im.crop((95, 370, 105, 380))
+im1.save(r'C:\Users\storm\OneDrive\Bureaublad\1.jpg')
+im2 = im.crop((120, 380, 130, 390))
+im2.save(r'C:\Users\storm\OneDrive\Bureaublad\2.jpg')
+im3 = im.crop((160, 415, 170, 425))
+im3.save(r'C:\Users\storm\OneDrive\Bureaublad\3.jpg')
+im4 = im.crop((210, 440, 220, 450))
+im4.save(r'C:\Users\storm\OneDrive\Bureaublad\4.jpg')
+im5 = im.crop((400, 320, 410, 330))
+im5.save(r'C:\Users\storm\OneDrive\Bureaublad\5.jpg')
+im6 = im.crop((430, 330, 440, 340))
+im6.save(r'C:\Users\storm\OneDrive\Bureaublad\6.jpg')
+im7 = im.crop((455, 350, 465, 360))
+im7.save(r'C:\Users\storm\OneDrive\Bureaublad\7.jpg')
+im8 = im.crop((490, 360, 500, 370))
+im8.save(r'C:\Users\storm\OneDrive\Bureaublad\8.jpg')
+
+imcontrole = im1
+controle()
+i = i + 1
+imcontrole = im2
+controle()
+i = i + 1
+imcontrole = im3
+controle()
+i = i + 1
+imcontrole = im4
+controle()
+i = i + 1
+imcontrole = im5
+controle()
+i = i + 1
+imcontrole = im6
+controle()
+i = i + 1
+imcontrole = im7
+controle()
+i = i + 1
+imcontrole = im7
+controle()
+i = i + 1
+
+plek()
+#print(plaatsen)
